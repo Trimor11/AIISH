@@ -46,3 +46,9 @@ def test_overfits_single_batch(model):
         loss.backward()
         opt.step()
     assert loss.item() < 0.5
+
+
+def test_loss_accepts_sliced_targets(model):
+    tokens = torch.randint(20, (4, 17))
+    _, loss = model(tokens[:, :-1], tokens[:, 1:])
+    assert loss.item() > 0
