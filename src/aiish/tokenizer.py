@@ -27,8 +27,8 @@ class CharTokenizer:
         return "".join(self.chars[i] for i in ids)
 
     def save(self, path: str | Path) -> None:
-        Path(path).write_text(json.dumps(self.chars, ensure_ascii=False))
+        Path(path).write_text(json.dumps(self.chars, ensure_ascii=False), encoding="utf-8")
 
     @classmethod
     def load(cls, path: str | Path) -> "CharTokenizer":
-        return cls(json.loads(Path(path).read_text()))
+        return cls(json.loads(Path(path).read_text(encoding="utf-8")))

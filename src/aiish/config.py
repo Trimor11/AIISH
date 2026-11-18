@@ -39,5 +39,5 @@ def _build(cls, values: dict):
 
 
 def load_config(path: str | Path) -> tuple[ModelConfig, TrainConfig]:
-    raw = yaml.safe_load(Path(path).read_text()) or {}
+    raw = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
     return _build(ModelConfig, raw.get("model", {})), _build(TrainConfig, raw.get("train", {}))
